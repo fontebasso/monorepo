@@ -1,0 +1,36 @@
+{
+  "private": true,
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.0.0-0",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-decorators": "^7.8.3",
+    "@babel/preset-env": "^7.9.0",
+    "@babel/preset-react": "^7.9.4",
+    "@babel/preset-typescript": "^7.9.0",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-plugin-module-resolver": "^4.0.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "babel-preset-minify": "^0.5.1",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "lerna": "^3.20.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-test-renderer": "^16.13.1"
+  },
+  "name": "project",
+  "workspaces": [
+    "packages/components",
+    "packages/helloworld"
+  ],
+  "scripts": {
+    "prepare": "yarn run bootstrap && yarn run build:base && yarn run build:declarations",
+    "bootstrap": "lerna bootstrap --use-workspaces",
+    "build:base": "lerna run --scope @project/components build",
+    "build:declarations": "lerna exec --scope @project/components \"tsc --project ./tsconfig.json\"",
+    "dev": "yarn run build:base && yarn run build:declarations",
+    "start": "node lerna.exec.js start",
+    "build": "node lerna.exec.js build"
+  }
+}
